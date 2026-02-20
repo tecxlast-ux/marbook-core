@@ -1,642 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Evidence-First Review Protocol v1.0</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>marbook-core | Genesis Structure</title>
   <style>
-    :root {
-      --bg: #05070b;
-      --bg-alt: #0d1117;
-      --card-bg: #111827;
-      --border-subtle: #1f2937;
-      --text-main: #e5e7eb;
-      --text-muted: #9ca3af;
-      --accent: #60a5fa;
-      --accent-soft: rgba(96, 165, 250, 0.16);
-      --code-bg: #020617;
-      --danger: #f97373;
-      --mono: "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: var(--sans);
-      background: radial-gradient(circle at top, #020617 0, #020617 40%, #020915 100%);
-      color: var(--text-main);
-      line-height: 1.7;
-    }
-
-    .page {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 24px 16px 48px;
-    }
-
-    @media (min-width: 768px) {
-      .page {
-        padding: 32px 0 64px;
-      }
-    }
-
-    h1, h2, h3 {
-      font-weight: 600;
-      letter-spacing: 0.01em;
-    }
-
-    h1 {
-      font-size: 1.9rem;
-      margin: 0 0 4px;
-    }
-
-    .subtitle {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      margin-bottom: 20px;
-    }
-
-    h2 {
-      font-size: 1.2rem;
-      margin: 0 0 12px;
-      display: flex;
-      align-items: baseline;
-      gap: 8px;
-    }
-
-    h2 .tag {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--accent);
-      background: var(--accent-soft);
-      padding: 2px 8px;
-      border-radius: 999px;
-    }
-
-    h3 {
-      font-size: 1rem;
-      margin: 18px 0 6px;
-      color: var(--accent);
-    }
-
-    p {
-      margin: 6px 0 10px;
-      font-size: 0.96rem;
-    }
-
-    ul, ol {
-      margin: 4px 0 10px 20px;
-      padding-left: 16px;
-      font-size: 0.96rem;
-    }
-
-    li {
-      margin: 3px 0;
-    }
-
-    code {
-      font-family: var(--mono);
-      font-size: 0.85rem;
-      background: var(--code-bg);
-      color: var(--accent);
-      padding: 2px 6px;
-      border-radius: 4px;
-      border: 1px solid #020617;
-    }
-
-    strong {
-      font-weight: 600;
-    }
-
-    .card {
-      background: linear-gradient(145deg, rgba(15,23,42,0.98), rgba(15,23,42,0.9));
-      border-radius: 12px;
-      border: 1px solid var(--border-subtle);
-      padding: 16px 18px 14px;
-      margin-bottom: 16px;
-      box-shadow: 0 14px 30px rgba(0,0,0,0.55);
-      backdrop-filter: blur(16px);
-    }
-
-    .card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 4px;
-    }
-
-    .section-index {
-      color: var(--accent);
-      font-size: 0.82rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-    }
-
-    .pill {
-      font-size: 0.76rem;
-      padding: 2px 10px;
-      border-radius: 999px;
-      border: 1px solid var(--border-subtle);
-      color: var(--text-muted);
-    }
-
-    .pill.danger {
-      border-color: var(--danger);
-      color: var(--danger);
-    }
-
-    .pill.ok {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-
-    hr {
-      border: none;
-      border-top: 1px solid #111827;
-      margin: 18px 0;
-    }
-
-    .toc {
-      background: rgba(15,23,42,0.9);
-      border-radius: 10px;
-      border: 1px solid var(--border-subtle);
-      padding: 10px 14px;
-      margin-bottom: 22px;
-      font-size: 0.9rem;
-    }
-
-    .toc-title {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--text-muted);
-      margin-bottom: 4px;
-    }
-
-    .toc a {
-      color: var(--accent);
-      text-decoration: none;
-      font-size: 0.88rem;
-    }
-
-    .toc a:hover {
-      text-decoration: underline;
-    }
-
-    .toc ul {
-      margin: 0;
-      padding-left: 16px;
-    }
-
-    .toc li {
-      margin: 1px 0;
-    }
-
-    .label {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-    }
-
-    .bubble {
-      display: inline-block;
-      font-size: 0.8rem;
-      padding: 3px 8px;
-      border-radius: 999px;
-      background: rgba(15,23,42,0.9);
-      border: 1px solid var(--border-subtle);
-      margin-right: 4px;
-    }
-
-    .flow {
-      font-family: var(--mono);
-      font-size: 0.86rem;
-      color: var(--text-muted);
-      overflow-x: auto;
-      white-space: nowrap;
-      padding: 6px 8px;
-      border-radius: 8px;
-      background: radial-gradient(circle at left, #020617, #020617 40%, #020617 100%);
-      border: 1px solid #020617;
-      margin: 6px 0 10px;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      * {
-        scroll-behavior: auto !important;
-      }
-    }
-
-    a.anchor-link {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 0.8rem;
-      margin-left: 4px;
-      opacity: 0.6;
-    }
-
-    .card:hover a.anchor-link {
-      opacity: 1;
-    }
-
-    .card small {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-    }
+    body { margin:0; font-family: Inter, system-ui, -apple-system, sans-serif; background:#0f1116; color:#e6e6e6; }
+    .layout { display:grid; grid-template-columns: 360px 1fr; min-height:100vh; }
+    .sidebar { border-right:1px solid #252a36; padding:18px; background:#121622; }
+    .content { padding:26px 30px; }
+    h1 { margin:0 0 8px; font-size:28px; }
+    .muted { color:#9aa3b2; }
+    .tree, .tree ul { list-style:none; margin:0; padding-left:16px; }
+    .tree > li { padding-left:0; }
+    .folder { color:#8ec5ff; font-weight:600; }
+    .file { color:#d8d8d8; }
+    .tree li { margin:6px 0; }
+    a { color:#9bc7ff; text-decoration:none; }
+    a:hover { text-decoration:underline; }
+    .card { background:#171d2b; border:1px solid #2a3140; border-radius:12px; padding:16px; margin:14px 0; }
+    code { background:#0e1320; border:1px solid #2a3140; border-radius:6px; padding:2px 6px; }
   </style>
 </head>
 <body>
-  <div class="page">
-
-    <header class="card">
-      <div class="card-header">
-        <div>
-          <div class="section-index">Evidence-First Review</div>
-          <h1>Evidence-First Review Protocol v1.0</h1>
-        </div>
-        <span class="pill ok">Stable Spec</span>
-      </div>
-      <p class="subtitle">
-        Designed for high-stakes runs: money, risk, irreversibility, operational changes, and repeatable review cycles.
-      </p>
-      <hr>
-      <div class="toc">
-        <div class="toc-title">Sections</div>
-        <ul>
-          <li><a href="#conformance-keywords">0. Conformance Keywords</a></li>
-          <li><a href="#purpose">1. Purpose &amp; Applicability</a></li>
-          <li><a href="#roles">2. Roles &amp; Authority</a></li>
-          <li><a href="#sources">3. Source of Truth &amp; Inputs</a></li>
-          <li><a href="#artifacts">4. Required Artifacts</a></li>
-          <li><a href="#evidence">5. Evidence &amp; Index</a></li>
-          <li><a href="#state-machine">6. State Machine</a></li>
-          <li><a href="#blocking">7. Blocking Rules</a></li>
-          <li><a href="#spec-template">8. SPEC Minimum Template</a></li>
-          <li><a href="#gates">9. Verification Gates</a></li>
-          <li><a href="#report">10. REPORT Output Contract</a></li>
-          <li><a href="#high-risk">11. High-Risk Gate</a></li>
-          <li><a href="#notion">12. Notion Implementation</a></li>
-        </ul>
-      </div>
-      <small>
-        Keywords <code>MUST</code>, <code>MUST NOT</code>, <code>SHOULD</code>, <code>SHOULD NOT</code>, <code>MAY</code> follow RFC 2119 and RFC 8174 (UPPERCASE only).
-      </small>
-    </header>
-
-    <!-- 0) Conformance Keywords -->
-    <section id="conformance-keywords" class="card">
-      <div class="card-header">
-        <span class="section-index">0. Conformance</span>
-        <a class="anchor-link" href="#conformance-keywords">#</a>
-      </div>
-      <h2>
-        Conformance Keywords
-        <span class="tag">Normative</span>
-      </h2>
-      <p>
-        The key words <code>MUST</code>, <code>MUST NOT</code>, <code>SHOULD</code>, <code>SHOULD NOT</code>, and <code>MAY</code>
-        are to be interpreted as described in RFC 2119, with the clarification that only UPPERCASE instances carry the
-        special meanings (per RFC 8174).
-      </p>
-    </section>
-
-    <!-- 1) Purpose and Applicability -->
-    <section id="purpose" class="card">
-      <div class="card-header">
-        <span class="section-index">1. Purpose &amp; Scope</span>
-        <a class="anchor-link" href="#purpose">#</a>
-      </div>
-      <h2>
-        Purpose and Applicability
-        <span class="tag">Scope</span>
-      </h2>
-      <p><strong>Purpose:</strong> Produce a review output that is:</p>
-      <ol>
-        <li>fact-only</li>
-        <li>evidence-traceable</li>
-        <li>comparable against a prior baseline</li>
-        <li>closing the loop via verifiable actions</li>
-      </ol>
-      <p>
-        <strong>Applies to:</strong>
-        Any task/run that involves money, risk, irreversibility, operational changes, or repeated review cycles.
-      </p>
-    </section>
-
-    <!-- 2) Roles and Authority -->
-    <section id="roles" class="card">
-      <div class="card-header">
-        <span class="section-index">2. Roles</span>
-        <a class="anchor-link" href="#roles">#</a>
-      </div>
-      <h2>
-        Roles and Authority
-        <span class="tag">Responsibility</span>
-      </h2>
-      <ul>
-        <li><strong>USER:</strong> Sole decision authority; owns risk and final acceptance.</li>
-        <li><strong>RUN OWNER:</strong> Single accountable owner for one run; ensures completion and follow-through.</li>
-        <li>
-          <strong>AI (Scribe/Validator):</strong> Structures, extracts facts, enforces gates, and refuses to invent missing information.
-        </li>
-      </ul>
-      <p>
-        <strong>Rule:</strong>
-        A run <code>MUST</code> have exactly one RUN OWNER.
-        If absent, the run is <span class="pill danger">BLOCK</span>.
-      </p>
-    </section>
-
-    <!-- 3) Source of Truth and Allowed Sources -->
-    <section id="sources" class="card">
-      <div class="card-header">
-        <span class="section-index">3. Sources</span>
-        <a class="anchor-link" href="#sources">#</a>
-      </div>
-      <h2>
-        Source of Truth and Allowed Sources
-        <span class="tag">Inputs</span>
-      </h2>
-      <ul>
-        <li>
-          <strong>SOURCE_OF_TRUTH (SoT):</strong>
-          The page/database explicitly declared as <code>CURRENT_PROTOCOL</code> (or equivalent) for this project context.
-        </li>
-        <li>
-          Any other page/database is <strong>NON-AUTHORITATIVE</strong> unless explicitly promoted to SoT by the USER
-          in the current run SPEC.
-        </li>
-      </ul>
-      <p>
-        <strong>Rule:</strong>
-        The AI <code>MUST NOT</code> use information outside the allowed sources stated in SPEC.
-      </p>
-    </section>
-
-    <!-- 4) Required Artifacts -->
-    <section id="artifacts" class="card">
-      <div class="card-header">
-        <span class="section-index">4. Artifacts</span>
-        <a class="anchor-link" href="#artifacts">#</a>
-      </div>
-      <h2>
-        Required Artifacts per Run
-        <span class="tag">Required</span>
-      </h2>
-      <p>Each run <code>MUST</code> include the following artifacts (each must be linkable/identifiable):</p>
-      <ol>
-        <li>SPEC (this run’s specification)</li>
-        <li>BASELINE (a specific prior run or defined starting state)</li>
-        <li>EVIDENCE INDEX (enumerated evidence items with pointers)</li>
-        <li>DELTA (changes vs baseline)</li>
-        <li>ACTION REGISTER (follow-up actions with accountability fields)</li>
-      </ol>
-      <p>If any are missing, the run is <span class="pill danger">BLOCK</span>.</p>
-    </section>
-
-    <!-- 5) Evidence Definition and Index Format -->
-    <section id="evidence" class="card">
-      <div class="card-header">
-        <span class="section-index">5. Evidence</span>
-        <a class="anchor-link" href="#evidence">#</a>
-      </div>
-      <h2>
-        Evidence Definition and Evidence Index Format
-        <span class="tag">Data Shape</span>
-      </h2>
-      <p>An Evidence Item is valid only if it contains all of:</p>
-      <ul>
-        <li><strong>EVIDENCE_ID:</strong> unique within the run (e.g., <code>E-001</code>)</li>
-        <li><strong>TYPE:</strong> one of <code>{link, file, log, screenshot, dataset, transaction, note}</code></li>
-        <li><strong>POINTER:</strong> resolvable reference (URL, Notion page link, file path, or database record ID)</li>
-        <li>
-          <strong>TIMESTAMP:</strong>
-          ISO 8601 (<code>YYYY-MM-DDThh:mm:ss±hh:mm</code>) or a date (<code>YYYY-MM-DD</code>) if time is unavailable
-        </li>
-        <li><strong>ONE-LINE DESCRIPTION:</strong> what the item is, not what it implies</li>
-      </ul>
-      <p>The EVIDENCE INDEX <code>MUST</code> be an ordered list of evidence items (no prose paragraphs).</p>
-    </section>
-
-    <!-- 6) State Machine -->
-    <section id="state-machine" class="card">
-      <div class="card-header">
-        <span class="section-index">6. State Machine</span>
-        <a class="anchor-link" href="#state-machine">#</a>
-      </div>
-      <h2>
-        State Machine
-        <span class="tag">Lifecycle</span>
-      </h2>
-      <div class="label">Flow</div>
-      <div class="flow">
-        IDLE → SPEC → EXECUTE → VERIFY → REPORT → FOLLOW-UP → CLOSE
-      </div>
-      <ul>
-        <li><strong>SPEC:</strong> Define intent, inputs, outputs, constraints, pass criteria.</li>
-        <li><strong>EXECUTE:</strong> Extract facts strictly from evidence; create delta; draft actions.</li>
-        <li><strong>VERIFY:</strong> Gate checks; mark unknowns; prevent unsupported claims.</li>
-        <li><strong>REPORT:</strong> Emit final constrained output.</li>
-        <li><strong>FOLLOW-UP:</strong> Track actions until verified done.</li>
-        <li><strong>CLOSE:</strong> Only after verification evidence is attached for completed actions.</li>
-      </ul>
-    </section>
-
-    <!-- 7) Blocking Rules -->
-    <section id="blocking" class="card">
-      <div class="card-header">
-        <span class="section-index">7. Blocking</span>
-        <a class="anchor-link" href="#blocking">#</a>
-      </div>
-      <h2>
-        Blocking Rules and Unblocking Behavior
-        <span class="tag">Gates</span>
-      </h2>
-      <p>A run is <span class="pill danger">BLOCK</span> if any of the following is true:</p>
-      <ul>
-        <li>Missing PASS criteria in SPEC</li>
-        <li>Missing BASELINE reference</li>
-        <li>Any “fact” is stated without at least one evidence pointer</li>
-        <li>Any action lacks OWNER, DUE, or VERIFY_METHOD</li>
-      </ul>
-      <p>
-        <strong>Unblocking behavior:</strong>
-        When BLOCK occurs, the AI <code>MUST</code> ask exactly one question that, if answered, would unblock the run, then stop.
-      </p>
-    </section>
-
-    <!-- 8) SPEC Minimum Template -->
-    <section id="spec-template" class="card">
-      <div class="card-header">
-        <span class="section-index">8. SPEC</span>
-        <a class="anchor-link" href="#spec-template">#</a>
-      </div>
-      <h2>
-        SPEC Minimum Template (MUST)
-        <span class="tag">Schema</span>
-      </h2>
-      <p>A SPEC is valid only if it includes all fields below:</p>
-      <ul>
-        <li><strong>TASK:</strong> concise statement of what is being reviewed/done</li>
-        <li>
-          <strong>INTENT:</strong> what decision/output this run must support
-          (e.g., go/no-go, scope change, risk assessment, performance verification)
-        </li>
-        <li><strong>BASELINE:</strong> explicit pointer (Run ID/link/date) to compare against</li>
-        <li><strong>ALLOWED INPUTS:</strong> list of allowed sources/links/files</li>
-        <li>
-          <strong>CONSTRAINTS:</strong>
-          explicit prohibitions (e.g., “no assumptions,” “no external sources,” “facts-only”)
-        </li>
-        <li><strong>OUTPUTS:</strong> enumerated required deliverables</li>
-        <li><strong>PASS:</strong> objective acceptance criteria</li>
-        <li>
-          <strong>RISK LEVEL:</strong>
-          <code>{LOW, MED, HIGH}</code> with stated consequence if wrong
-        </li>
-      </ul>
-    </section>
-
-    <!-- 9) Verification Gates -->
-    <section id="gates" class="card">
-      <div class="card-header">
-        <span class="section-index">9. Gates</span>
-        <a class="anchor-link" href="#gates">#</a>
-      </div>
-      <h2>
-        Verification Gates (MUST Pass Before REPORT)
-        <span class="tag">Checks</span>
-      </h2>
-      <p>The run may proceed to REPORT only if all gates are satisfied:</p>
-      <ol>
-        <li>
-          <strong>Evidence Coverage Gate:</strong>
-          Every fact in FACTS and every DELTA item has ≥1 evidence ID cited.
-        </li>
-        <li>
-          <strong>Delta Gate:</strong>
-          DELTA contains exactly 3–5 highest-impact changes vs BASELINE, each tied to evidence.
-        </li>
-        <li>
-          <strong>Action Gate:</strong>
-          Each action has:
+  <main class="layout">
+    <aside class="sidebar">
+      <h2>Folder Tree</h2>
+      <ul class="tree">
+        <li><span class="folder">Family/</span>
           <ul>
-            <li><code>ACTION_ID</code></li>
-            <li><code>OWNER</code> (single owner)</li>
-            <li><code>DUE</code> (date <code>YYYY-MM-DD</code>)</li>
-            <li>
-              <code>VERIFY_METHOD</code> (how completion is proven, plus what evidence will be attached)
+            <li><span class="folder">genesis.punnaraj.com/</span>
+              <ul>
+                <li><span class="folder">00_CORE_SYSTEM/</span>
+                  <ul>
+                    <li><span class="folder">10_MANIFEST/</span>
+                      <ul>
+                        <li class="file"><a href="Family/genesis.punnaraj.com/00_CORE_SYSTEM/10_MANIFEST/MASTER_INDEX.md">MASTER_INDEX.md</a></li>
+                        <li class="file"><a href="Family/genesis.punnaraj.com/00_CORE_SYSTEM/10_MANIFEST/USER_IDENTITY.md">USER_IDENTITY.md</a></li>
+                        <li class="file"><a href="Family/genesis.punnaraj.com/00_CORE_SYSTEM/10_MANIFEST/SECURITY_LAYER_UPDATE.md">SECURITY_LAYER_UPDATE.md</a></li>
+                      </ul>
+                    </li>
+                    <li><span class="folder">20_METHODOLOGY/</span></li>
+                    <li><span class="folder">30_DELIVERABLES/</span></li>
+                    <li><span class="folder">40_REFERENCE/</span></li>
+                    <li><span class="folder">90_ARCHIVE/</span></li>
+                  </ul>
+                </li>
+              </ul>
             </li>
           </ul>
         </li>
-        <li>
-          <strong>No-Invention Gate:</strong>
-          Any missing information is labeled <code>UNKNOWN</code> and does not appear as a fact.
-        </li>
-      </ol>
-      <p>If any gate fails, status becomes <span class="pill danger">BLOCK</span> (and follow the single-question rule).</p>
-    </section>
-
-    <!-- 10) REPORT Output Contract -->
-    <section id="report" class="card">
-      <div class="card-header">
-        <span class="section-index">10. REPORT</span>
-        <a class="anchor-link" href="#report">#</a>
-      </div>
-      <h2>
-        REPORT Output Contract (MUST)
-        <span class="tag">Output</span>
-      </h2>
-      <p>The REPORT <code>MUST</code> be ≤ 12 lines total and strictly follow this schema:</p>
-      <ul>
-        <li><strong>STATUS:</strong> <code>PASS | FAIL | BLOCK</code></li>
-        <li>
-          <strong>FACTS:</strong> exactly 3–5 bullet lines, each ends with <code>[E-###]</code>
-        </li>
-        <li>
-          <strong>DELTA:</strong> exactly 3–5 bullet lines, each ends with <code>[E-###]</code>
-        </li>
-        <li>
-          <strong>RISKS:</strong> exactly 1–3 bullet lines (may cite evidence where applicable)
-        </li>
-        <li>
-          <strong>ACTIONS:</strong> exactly 1–5 bullet lines in format
-          <code>A-### / OWNER / DUE / VERIFY_METHOD</code>
-        </li>
-        <li>
-          <strong>NEXT:</strong> exactly one line stating the single next action to execute
-        </li>
+        <li><span class="folder">docs/ssot/ssot-goldstart/</span></li>
+        <li><span class="folder">index/</span></li>
+        <li><span class="folder">ssot/</span></li>
       </ul>
-      <p>No additional sections, no narrative, no opinions.</p>
-    </section>
+    </aside>
 
-    <!-- 11) High-Risk Gate -->
-    <section id="high-risk" class="card">
-      <div class="card-header">
-        <span class="section-index">11. High Risk</span>
-        <a class="anchor-link" href="#high-risk">#</a>
+    <section class="content">
+      <h1>Genesis Knowledge Base Structure</h1>
+      <p class="muted">A public static site view of the requested folder architecture with mock seed data.</p>
+
+      <div class="card">
+        <h3>What was added</h3>
+        <ul>
+          <li>Core structure under <code>Family/genesis.punnaraj.com/00_CORE_SYSTEM</code>.</li>
+          <li>Manifest, methodology, deliverable, reference, and archive placeholder documents.</li>
+          <li>Additional scaffold folders: <code>docs/ssot/ssot-goldstart</code>, <code>index</code>, and <code>ssot/*</code>.</li>
+        </ul>
       </div>
-      <h2>
-        High-Risk Gate (RISK = HIGH)
-        <span class="tag">Risk</span>
-      </h2>
-      <p>
-        If RISK LEVEL = <code>HIGH</code>, the run <code>MUST</code> include a PREMORTEM subsection inside SPEC with:
-      </p>
-      <ul>
-        <li>exactly 5 plausible failure causes</li>
-        <li>exactly 5 corresponding mitigations</li>
-        <li>each mitigation mapped to either an ACTION or a constraint</li>
-      </ul>
-      <p>If absent, status is <span class="pill danger">BLOCK</span>.</p>
-    </section>
 
-    <!-- 12) Notion Implementation -->
-    <section id="notion" class="card">
-      <div class="card-header">
-        <span class="section-index">12. Notion</span>
-        <a class="anchor-link" href="#notion">#</a>
+      <div class="card">
+        <h3>Publish publicly</h3>
+        <p>This repository is ready for GitHub Pages:</p>
+        <ol>
+          <li>Push this branch to GitHub.</li>
+          <li>Go to <strong>Settings → Pages</strong>.</li>
+          <li>Set source to <strong>Deploy from branch</strong>, branch <strong>main</strong> (or your target), folder <strong>/ (root)</strong>.</li>
+          <li>GitHub will host this <code>index.html</code> as a public website.</li>
+        </ol>
       </div>
-      <h2>
-        Notion Implementation (Minimal, Deterministic)
-        <span class="tag">Reference</span>
-      </h2>
-      <p>Create exactly four databases with required properties:</p>
-
-      <h3>1. RUNS</h3>
-      <p>
-        Run ID, Date, Task, Status, Baseline (relation to RUNS),
-        Risk, Evidence (relation to EVIDENCE),
-        Actions (relation to ACTIONS), Report (text)
-      </p>
-
-      <h3>2. EVIDENCE</h3>
-      <p>
-        Evidence ID, Type, Pointer, Timestamp, Description,
-        Run (relation to RUNS)
-      </p>
-
-      <h3>3. ACTIONS</h3>
-      <p>
-        Action ID, Action, Owner, Due (date), Verify Method, Status,
-        Verification Evidence (relation to EVIDENCE), Run (relation to RUNS)
-      </p>
-
-      <h3>4. DECISIONS</h3>
-      <p>
-        Decision ID, Context (facts only), Options, Chosen, Rationale (facts only),
-        Risk, Run (relation to RUNS)
-      </p>
     </section>
-
-  </div>
+  </main>
 </body>
 </html>
