@@ -2,6 +2,6 @@
 
 Mock identity profile to establish repository structure.
 
-- Name: Visut Punnaraj
+- Name: [[Wisut Punnaraj]]
 - Role: Program Sponsor
 - Domain: Genesis System

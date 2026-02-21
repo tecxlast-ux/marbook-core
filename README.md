@@ -1,6 +1,6 @@
-# marbook-core
+# MUD_CORE
 
-This repository now includes a concrete folder architecture and mock documents inspired by the provided screenshot.
+This repository now includes a concrete folder architecture and draft/in-design documents for Mutaul Understanding Document for every parties/entities involving in this project.
 
 ## Added structure
 
