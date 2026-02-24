@@ -1,4 +1,4 @@
-# ABOUT USER — VISUT PUNNARAJ A.I
+# ABOUT USER — Wisut Punnaraj
 
 Reference profile and context packet.
 
