@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>marbook-core | Genesis Structure</title>
+  <title>GENESIS_HOME | Repository Structure</title>
   <style>
     body { margin:0; font-family: Inter, system-ui, -apple-system, sans-serif; background:#0f1116; color:#e6e6e6; }
-    .layout { display:grid; grid-template-columns: 360px 1fr; min-height:100vh; }
-    .sidebar { border-right:1px solid #252a36; padding:18px; background:#121622; }
+    .layout { display:grid; grid-template-columns: 380px 1fr; min-height:100vh; }
+    .sidebar { border-right:1px solid #252a36; padding:18px; background:#121622; overflow:auto; }
     .content { padding:26px 30px; }
     h1 { margin:0 0 8px; font-size:28px; }
     .muted { color:#9aa3b2; }
@@ -27,56 +27,55 @@
     <aside class="sidebar">
       <h2>Folder Tree</h2>
       <ul class="tree">
-        <li><span class="folder">Family/</span>
+        <li><span class="folder">10_MANIFEST/</span>
           <ul>
-            <li><span class="folder">genesis.punnaraj.com/</span>
+            <li class="file"><a href="10_MANIFEST/MASTER_INDEX.md">MASTER_INDEX.md</a></li>
+            <li class="file"><a href="10_MANIFEST/USER_IDENTITY.md">USER_IDENTITY.md</a></li>
+            <li class="file"><a href="10_MANIFEST/SECURITY_LAYER_UPDATE.md">SECURITY_LAYER_UPDATE.md</a></li>
+          </ul>
+        </li>
+        <li><span class="folder">20_METHODOLOGY/</span></li>
+        <li><span class="folder">30_DELIVERABLES/</span></li>
+        <li><span class="folder">40_REFERENCE/</span></li>
+        <li><span class="folder">90_ARCHIVE/</span></li>
+        <li><span class="folder">SSOT/</span>
+          <ul>
+            <li><span class="folder">core/</span></li>
+            <li><span class="folder">FAMILY_CAPITAL_SYSTEM/</span></li>
+            <li><span class="folder">punnaraj.com/</span>
               <ul>
-                <li><span class="folder">00_CORE_SYSTEM/</span>
-                  <ul>
-                    <li><span class="folder">10_MANIFEST/</span>
-                      <ul>
-                        <li class="file"><a href="Family/genesis.punnaraj.com/00_CORE_SYSTEM/10_MANIFEST/MASTER_INDEX.md">MASTER_INDEX.md</a></li>
-                        <li class="file"><a href="Family/genesis.punnaraj.com/00_CORE_SYSTEM/10_MANIFEST/USER_IDENTITY.md">USER_IDENTITY.md</a></li>
-                        <li class="file"><a href="Family/genesis.punnaraj.com/00_CORE_SYSTEM/10_MANIFEST/SECURITY_LAYER_UPDATE.md">SECURITY_LAYER_UPDATE.md</a></li>
-                      </ul>
-                    </li>
-                    <li><span class="folder">20_METHODOLOGY/</span></li>
-                    <li><span class="folder">30_DELIVERABLES/</span></li>
-                    <li><span class="folder">40_REFERENCE/</span></li>
-                    <li><span class="folder">90_ARCHIVE/</span></li>
-                  </ul>
-                </li>
+                <li class="file"><a href="SSOT/punnaraj.com/GENESIS_HOME">GENESIS_HOME</a></li>
+                <li class="file"><a href="SSOT/punnaraj.com/README">README</a></li>
+                <li class="file"><a href="SSOT/punnaraj.com/SECURITY">SECURITY</a></li>
               </ul>
             </li>
           </ul>
         </li>
         <li><span class="folder">docs/ssot/ssot-goldstart/</span></li>
         <li><span class="folder">index/</span></li>
-        <li><span class="folder">ssot/</span></li>
       </ul>
     </aside>
 
     <section class="content">
-      <h1>Genesis Knowledge Base Structure</h1>
-      <p class="muted">A public static site view of the requested folder architecture with mock seed data.</p>
+      <h1>GENESIS | Home</h1>
+      <p class="muted">Static view of the current repository structure.</p>
 
       <div class="card">
-        <h3>What was added</h3>
+        <h3>Structure status</h3>
         <ul>
-          <li>Core structure under <code>Family/genesis.punnaraj.com/00_CORE_SYSTEM</code>.</li>
-          <li>Manifest, methodology, deliverable, reference, and archive placeholder documents.</li>
-          <li>Additional scaffold folders: <code>docs/ssot/ssot-goldstart</code>, <code>index</code>, and <code>ssot/*</code>.</li>
+          <li>Top-level core folders are flattened and active (<code>10_*</code> through <code>90_*</code>).</li>
+          <li>Source of truth is under <code>SSOT/</code> (uppercase path).</li>
+          <li>All links on this page point to existing files in the current tree.</li>
         </ul>
       </div>
 
       <div class="card">
         <h3>Publish publicly</h3>
-        <p>This repository is ready for GitHub Pages:</p>
+        <p>This repository can be published with GitHub Pages from root:</p>
         <ol>
           <li>Push this branch to GitHub.</li>
-          <li>Go to <strong>Settings → Pages</strong>.</li>
-          <li>Set source to <strong>Deploy from branch</strong>, branch <strong>main</strong> (or your target), folder <strong>/ (root)</strong>.</li>
-          <li>GitHub will host this <code>index.html</code> as a public website.</li>
+          <li>Open <strong>Settings → Pages</strong>.</li>
+          <li>Set source to <strong>Deploy from branch</strong>, folder <strong>/ (root)</strong>.</li>
         </ol>
       </div>
     </section>
