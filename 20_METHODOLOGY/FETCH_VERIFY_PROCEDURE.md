@@ -4,7 +4,7 @@ Objective:
 Ensure any AI model starts from the actual current GitHub state before doing work.
 
 Repository:
-https://github.com/tecxlast-ux/marbook-core
+https://github.com/tecxlast-ux/MUD_CORE
 Branch: main
 
 Step 1 — Fetch
